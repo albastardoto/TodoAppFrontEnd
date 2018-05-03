@@ -1,5 +1,6 @@
 export default{
     todos:[],
     authKey:"",
-    numAjaxCallsInProgress:0
+    numAjaxCallsInProgress:0,
+    loggedIn:false
 }

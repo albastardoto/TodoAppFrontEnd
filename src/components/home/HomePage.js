@@ -1,6 +1,4 @@
 import React from "react";
-import {Link} from "react-router";
-import landing from "../../Images/sky.jpeg";
 import "./HomePage.css";
 //import {Jumbotron, Button} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.css';

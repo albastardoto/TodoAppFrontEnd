@@ -1,15 +1,30 @@
-export function loadTodos(){
+import axios from "axios";
+axios.defaults.baseURL = 'https://still-wildwood-51429.herokuapp.com';
+
+export function loadTodosAPI(){
     return new Promise((resolve,reject)=>{
-        let http = new XMLHttpRequest();
-        http.onreadystatechange= function(){
-            if(http.readyState===4 && http.status===200){
-                resolve(JSON.parse(http.response.todos))
-            }else{
-                reject(new Error("something went wrong"));
-            }
-        };
-        http.open("GET","https://still-wildwood-51429.herokuapp.com/todos",true);
-        http.setRequestHeader("x-auth","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YWI0MTg0M2NlNjk4YTAwMTQyYTIxNDMiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTIyMzMzMjYwfQ.qAYIYhlKUrU4BZYmHXZW6H1HXJrCa_huCK1f0wVMtcM");
-        http.send();
+        axios.get("/todos").then(res=>{
+            resolve(res.data.todos);
+        }).catch(error=>{
+            reject(error);
+        });
     });
+}
+
+export function login(data){
+    return new Promise((resolve,reject)=>{
+        console.log(data);
+        return axios.post("/users/login",data).then((res)=>{
+            resolve(res);
+        }).catch(err=>{
+            reject(err);
+        })
+    })
+}
+export function setAuthorizationToken(token){
+    if(token){
+        axios.defaults.headers.common["x-auth"]=token;
+    }else{
+        delete axios.defaults.headers.common["x-auth"];
+    }
 }

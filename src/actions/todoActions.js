@@ -1,16 +1,19 @@
 import * as types from "./actionTypes";
 import {beginAjaxCall, ajaxCallError} from "./ajaxStatusActions";
-import {loadTodos} from "../api/TodoApi";
-export function loadTodosSuccess(courses){
-    return {type:types.LOAD_TODOS_SUCCESS,courses}
+import {loadTodosAPI} from "../api/TodoApi";
+
+
+
+export function loadTodosSuccess(todos){
+    return {type:types.LOAD_TODOS_SUCCESS,todos}
 }
 export function loadTodos(){
     return function(dispatch){
       dispatch(beginAjaxCall());
-      return loadTodos.then(courses=>{
-        dispatch(loadCoursesSuccess(courses));
+      return loadTodosAPI().then(todos=>{
+        dispatch(loadTodosSuccess(todos));
       }).catch(error =>{
-  
+        dispatch(ajaxCallError());
         throw(error);
       });
     };

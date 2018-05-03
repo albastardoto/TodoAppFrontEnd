@@ -1,0 +1,24 @@
+
+.Error-enter {
+    opacity: 0;
+    max-height: 20px;
+    transform: scale(0.8);
+  }
+  .Error-enter-active {
+    opacity: 1;
+    max-height: 100px;
+    transform:scale(1);
+    transition: all 200ms ease-out;
+  }
+  .Error-exit {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  .Error-exit-active {
+    max-height: 0;
+    padding: 0;
+    opacity: 0.01;
+    transform: scale(0.9) ;
+    transition: all 300ms ease-out;
+
+  }
