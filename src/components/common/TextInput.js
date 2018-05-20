@@ -1,13 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Error from "./Error";
 import {CSSTransition} from "react-transition-group";
 import "./Error.css";
-const TextInput=({name,label,onChange,placeholder,value,error,type})=>{
+const TextInput=({name,label,onChange,placeholder,value,error,type,autocomplete})=>{
   let wrapperClass="form-group";
   let status=false;
   if(error && error.length>0){
-    wrapperClass+=" " +"has error";
+    wrapperClass+=" has error";
     status=true;
   }
 
@@ -17,13 +16,13 @@ const TextInput=({name,label,onChange,placeholder,value,error,type})=>{
       <label htmlFor={name}>{label}</label>
       <div className="field">
         <input
-          type="text"
           name={name}
           className="form-control"
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          type={type}/>
+          type={type}
+          autoComplete={autocomplete}/>
           <CSSTransition
           in={status}
           classNames="Error"
@@ -45,6 +44,10 @@ TextInput.propTypes={
   placeholder: PropTypes.string,
   value:PropTypes.string,
   error:PropTypes.string,
-  type:PropTypes.string
+  type:PropTypes.string,
+  autocomplete:PropTypes.string
 };
+TextInput.defaultProps={
+  autocomplete:""
+}
 export default TextInput;

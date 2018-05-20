@@ -26,30 +26,31 @@ class LoginPage extends React.Component{
         let user=this.state.user;
         user[field]=event.target.value;
         return this.setState({user});
-
     }
-    saveUser(event){
-        event.preventDefault();
-        if(!this.userFormIsValid()){
-            return;
-        }
-        this.props.actions.signIn(this.state.user).then(()=>{
-            toastr.success("You logged in successfuly",null,{"positionClass": "toast-bottom-right"});
-        },(err)=>{
-            if(err.message==="Request failed with status code 401"){
+        saveUser(event){
+            event.preventDefault();
+            if(!this.userFormIsValid()){
+                return;
+            }
+            this.props.actions.signIn(this.state.user).then(()=>{
+                toastr.success("You logged in successfuly",null,{"positionClass": "toast-bottom-right"});
+                this.props.history.push("/todos");
+            },(err)=>{
                 let errors=this.state.errors;
                 errors.failure=true;
                 this.setState(errors);
                 console.log(this.state);
-                return;
-            }
-            toastr.error("Something went wrong"+ err.message ,null,{"positionClass": "toast-bottom-right"});
-        });
-    }
+                if(err.message==="Request failed with status code 401"){
+                    toastr.error("Something went wrong" ,null,{"positionClass": "toast-bottom-right"});
+                    return;
+                }
+                toastr.error("Something went wrong" ,null,{"positionClass": "toast-bottom-right"});
+            });
+        }
     userFormIsValid(){
         let valid = true;
         let errors={
-            title:""
+            failure:false
         };
         if(!IsEmail.validate(this.state.user.email)){
             errors.email="Email is not valid.";
@@ -59,7 +60,7 @@ class LoginPage extends React.Component{
             errors.password=" Password must be at least 8 characters long";
             valid=false;
         }
-        this.setState({errors:errors});
+        this.setState({errors});
         return valid;
     }
 
