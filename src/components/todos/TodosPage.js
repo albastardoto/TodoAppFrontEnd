@@ -11,17 +11,30 @@ class TodosPage extends React.Component{
         constructor(props,context){
         super(props,context);
         this.state={
-            deletedTodos:[]
+            deletedTodos:[],
+            addedTodo:[],
+            todo:{
+                text:""
+            }
         }
         this.deleteTodo=this.deleteTodo.bind(this);
+        this.createTodo=this.createTodo.bind(this);
+        this.updateTodoState=this.updateTodoState.bind(this);
     }
-
+    updateTodoState(event){
+        const field= event.target.name;
+        let todo=this.state.todo;
+        todo[field]=event.target.value;
+        return this.setState({todo});
+    }
     deleteTodo(id){
         let deletedTodos=this.state.deletedTodos;
         deletedTodos.push({id});
         this.setState(deletedTodos);
         this.props.actions.deleteTodo(id).then(null,(error)=>{
-            deletedTodos.pop();
+            deletedTodos=deletedTodos.filter(todoId=>{
+                return id!==todoId
+            });
             this.setState(deletedTodos);
             if(error.message==="Request failed with status code 401"){
 
@@ -31,11 +44,13 @@ class TodosPage extends React.Component{
         });
     }
 
+    createTodo(){
+        console.log("creating");
+        this.props.actions.createTodo({text:this.state.todo.text});
+    }
     render(){
         let loading=false;
-        console.log(this.props.todos);
         if(this.props.ajaxCall>0 && this.props.todos.length===0){
-            console.log("in if");
             loading=true;
         }
         let todos = this.props.todos;
@@ -47,6 +62,10 @@ class TodosPage extends React.Component{
             }
             return true;
         })
+        if(this.state.addedTodo.length>0){
+            todos.push(this.state.addedTodo);
+        }
+
         const todoItems=todos.map((todo)=>{
         return(<Todo key={todo._id} id={todo._id} 
         name={todo.text} delete={this.deleteTodo}/>
@@ -55,7 +74,7 @@ class TodosPage extends React.Component{
         return(
             <section className="container">
                 <h1 className="title">To-Dos</h1>
-                <AddTodo></AddTodo> 
+                <AddTodo addTodoFN={this.createTodo} onChange={this.updateTodoState} todo={this.state.todo}></AddTodo> 
                     {todoItems}
                 <Spinner loading={loading}/>
             </section>

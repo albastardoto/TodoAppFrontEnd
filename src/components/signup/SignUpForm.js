@@ -18,8 +18,7 @@ const SignUpForm=({onChange,errors,user,onSave})=>{
                 value={user.checkPassword} 
                 autocomplete="new-password"/>
                 
-                <Error error={errors.failure} message="There seems to be a problem with either the
-                email or password"/>
+                <Error error={errors.failure} message="That email is already taken"/>
                 <button className="btn btn-primary" type="submit" onClick={onSave}>Login</button>
             </div>
         </form>

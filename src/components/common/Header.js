@@ -15,7 +15,7 @@ class Header extends React.Component{
     };
     render(){
         return(            
-        <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <NavLink className="navbar-brand" strict to="/">To-Do</NavLink>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
@@ -45,7 +45,6 @@ class Header extends React.Component{
     }
 };
 function mapStateToProps(state,ownProps){
-    console.log(state);
     return{
         loggedIn:state.user.loggedIn
     };

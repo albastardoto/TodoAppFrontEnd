@@ -1,6 +1,6 @@
 import * as types from "./actionTypes";
 import {beginAjaxCall, ajaxCallError} from "./ajaxStatusActions";
-import {loadTodosAPI, deleteTodoAPI} from "../api/TodoApi";
+import {loadTodosAPI, deleteTodoAPI, createTodoAPI} from "../api/TodoApi";
 import { logOut } from "./userActions";
 
 export function loadTodosSuccess(todos){
@@ -9,6 +9,13 @@ export function loadTodosSuccess(todos){
 export function deleteTodoSuccess(id){
   return {type:types.DELETE_TODO_SUCCESS,id}
 }
+export function createTodoSuccess(todo){
+  return {type:types.CREATE_TODO_SUCCESS,todo}
+}
+export function createTodoError(todo){{
+  return {type:types.CREATE_TODO_ERROR,text:todo.text}
+}}
+
 export function loadTodos(){
     return function(dispatch){
       dispatch(beginAjaxCall());
@@ -32,5 +39,17 @@ export function deleteTodo(todo){
       dispatch(ajaxCallError());
       throw(error);
     });
+  }
+}
+export function createTodo(todo){
+  return function(dispatch){
+    dispatch(beginAjaxCall());
+    return createTodoAPI(todo).then((todo)=>{
+      dispatch(createTodoSuccess(todo))
+    }).catch(error=>{
+      dispatch(ajaxCallError());
+      dispatch(createTodoError(todo));
+      throw(error);
+    })
   }
 }

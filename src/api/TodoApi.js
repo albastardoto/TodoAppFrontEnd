@@ -4,6 +4,7 @@ axios.defaults.baseURL = 'https://still-wildwood-51429.herokuapp.com';
 export function loadTodosAPI(){
     return new Promise((resolve,reject)=>{
         axios.get("/todos").then(res=>{
+            console.log(res);
             resolve(res.data.todos);
         }).catch(error=>{
             reject(error);
@@ -45,10 +46,18 @@ export function deleteTodoAPI(id){
         }).catch(err=>{
             reject(err);
         })
-    })
+    });
 }
 
-
+export function createTodoAPI(todo){
+    return new Promise((res,rej)=>{
+        return axios.post("/todos",todo).then((resp)=>{
+            res(resp.data);
+        }).catch(err=>{
+            rej(err);
+        });
+    });
+}
 
 
 export function setAuthorizationToken(token){

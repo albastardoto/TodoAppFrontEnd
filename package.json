@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
+    "font-awesome": "^4.7.0",
     "isemail": "^3.1.2",
     "jquery": "^3.3.1",
     "jsonwebtoken": "^8.2.1",
@@ -19,6 +20,7 @@
     "react-transition-group": "^2.3.1",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "scrollreveal": "^3.4.0",
     "toastr": "^2.1.4"
   },
   "scripts": {

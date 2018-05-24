@@ -1,13 +1,61 @@
+.everything{
+    background-color: rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
+}
 .Landing{
     background-image:url(../../Images/sky.jpeg);
-    height: 100vh;
+    height: 91vh;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    position: relative;
 }
 .Title{
-    color: white;
-    align-items: center;
+    color:white;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin:0;
+    transform: translate(-50%,-50%);
+}
+.Title h1{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:70px;
+}
+.Title p{
+    font-size:20px;
+}
+.row{
+    height: 50vh;
+}
+.subTitle{
+    height:60px;
+}
+.subTitle h2{
+    padding-top:4px;
+}
 
+.svg{
+    height: 200px;
+}
+.powered h3{
+    padding-top:20px;
+}
+.img-fluid{
+    height: 30vh;
+}
+i{
+    height: 100px;
+    width: 100px;
+    font-size:  40px !important;
+    padding: 35px 25px;
+    border-radius: 50%;
+    background-color: #6699cc;
+    color: #fff;
+}
+@media(max-with:576px){
+    .Title{
+        font-size: 0.5em;
+    }
 }

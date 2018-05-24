@@ -46,14 +46,10 @@ class SignUpPage extends React.Component{
             toastr.success("You signed up successfuly",null,{"positionClass": "toast-bottom-right"});
             this.props.history.push("/todos");
         },(err)=>{
-            console.log(err);
             let errors=this.state.errors;
-            errors.failure=true;
-
-            this.setState(errors);
-            if(err.message==="Request failed with status code 401"){
-
-                toastr.error("Something went wrong" ,null,{"positionClass": "toast-bottom-right"});
+            if(err.message==="Request failed with status code 409"){
+                errors.failure=true;
+                this.setState({errors});
                 return;
             }
             toastr.error("Something went wrong" ,null,{"positionClass": "toast-bottom-right"});
@@ -62,7 +58,7 @@ class SignUpPage extends React.Component{
     userFormIsValid(){
         let valid = true;
         let errors={
-            failure:true
+            failure:false
         };
         if(!IsEmail.validate(this.state.user.email)){
             errors.email="Email is not valid.";
