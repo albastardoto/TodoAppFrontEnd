@@ -26,11 +26,17 @@
 .Title p{
     font-size:20px;
 }
+.Title .btn{
+    position:absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
 .row{
     height: 50vh;
 }
 .subTitle{
     height:60px;
+    margin-bottom: 10px;
 }
 .subTitle h2{
     padding-top:4px;
@@ -54,8 +60,11 @@ i{
     background-color: #6699cc;
     color: #fff;
 }
-@media(max-with:576px){
-    .Title{
-        font-size: 0.5em;
+@media screen and (max-width:450px){
+    .Title h1{
+        font-size: 50px;
+    }
+    .Title p{
+        font-size:20px;
     }
 }

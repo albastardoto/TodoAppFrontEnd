@@ -1,4 +1,9 @@
 .todo{
-    padding:1rem;
+    padding:.5rem;
     font-size: 1.2em;
+}
+.todoRow{
+    height: fit-content;
+    word-break: break-all;
+    margin-bottom: 4px;
 }

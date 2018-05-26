@@ -7,9 +7,12 @@ class Todo extends React.Component{
     }
     render(){
         return(
-            <div className="todo container rounded border d-block">
+            <div className="row todoRow">
+            <div className="todo rounded border col-9 col-md-10 col-lg-11">
             {this.props.name}
-            <button onClick={this.deleteTodo.bind(this)} className="btn btn-danger float-right">delete</button>
+            </div>
+            
+            <button onClick={this.deleteTodo.bind(this)} className="btn btn-outline-info col-3 col-md-2 col-lg-1">delete</button> 
             </div>
         );
     }

@@ -47,6 +47,9 @@ class TodosPage extends React.Component{
     createTodo(){
         console.log("creating");
         this.props.actions.createTodo({text:this.state.todo.text});
+        this.setState({
+            text:""
+        });
     }
     render(){
         let loading=false;
@@ -75,7 +78,9 @@ class TodosPage extends React.Component{
             <section className="container">
                 <h1 className="title">To-Dos</h1>
                 <AddTodo addTodoFN={this.createTodo} onChange={this.updateTodoState} todo={this.state.todo}></AddTodo> 
-                    {todoItems}
+                    <div className="container">
+
+                    </div>{todoItems}
                 <Spinner loading={loading}/>
             </section>
 
